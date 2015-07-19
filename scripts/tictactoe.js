@@ -1,29 +1,22 @@
-/*
-0 1 2
-3 4 5
-6 7 8
-
-1  2  3  4
-5  6  7  8 
-9  10 11 12
-13 14 15 16
-
-0  1  2  3
-4  5  6  7
-8  9  10 11
-12 13 14 15
-
-0  1  2  3  4
-5  6  7  8  9
-10 11 12 13 14
-15 16 17 18 19
-20 21 22 23 24
-*/
 console.log("Linked!");
 //get names
+$(document).ready(function(){
+
+function getInput(){  
+  console.log($('button'));
+  console.log($('#submit'));
+  $('button').click(function() {
+    console.log("clicked");
+    debugger
+    //var player1 = $('#player1-name').val();
+    //console.log(player1);
+  });
+}
+getInput();
 
 //get dimensions
 var dimension = 3;
+//get picture
 
 function makeBoard(){
   var y;
@@ -31,31 +24,32 @@ function makeBoard(){
   var board = $("<div class='board'></div>");
   for (y=0; y<dimension; y++){
     for (x=0; x<dimension; x++){
-      var cell = $('<div>box</div>');
+      var cell = $('<div>&nbsp</div>');//that's a non-breaking space
       var cellId = dimension * y + x;
       cell.attr('class','box').attr('id',cellId);
-      //<div class="col-xs-4"></div> for thirds
       board.append(cell);
     }
   }
-  $('body').append(board);
-  //make it display rows with css
+  $('.container').append(board);
+  $('.container').css('width', 230*dimension + 'px');//works only up to size 24
 };
 makeBoard();
 
 
 function clicking(){
-  var player1 = true;
-  var player2 = false;
+  var playerX = true;
+  var playerO = false;
   $('.box').click(function() {
-    if ($('#'+this.id).text() === "box"){
-      if (player1) {
-        player1 = false;
-        player2 = true;
+    console.log($('#'+this.id).text());
+    //&nbsp is CharCode 160
+    if ($('#'+this.id).text() == String.fromCharCode(160)){ 
+      if (playerX) {
+        playerX = false;
+        playerO = true;
         $('#'+this.id).text("X");
-      } else if (player2) {
-        player1 = true;
-        player2 = false;
+      } else if (playerO) {
+        playerX = true;
+        playerO = false;
         $('#'+this.id).text("O");
       }
       checkWinner();
@@ -73,7 +67,7 @@ function checkWinner() {
       
       for (var i = boxId; i<boxId+dimension; i++) {
         var startOfRow = $('#'+boxId);
-        if (startOfRow.text() === $('#'+i).text() && !($('#'+i).text() === "box")) {
+        if (startOfRow.text() === $('#'+i).text() && !($('#'+i).text() === "String.fromCharCode(160)")) {
           winningRowCounter +=1;
         }
       }
@@ -87,7 +81,7 @@ function checkWinner() {
       var winningColumnCounter = 0;
       for (var j = boxId; j<dimension*dimension; j+=dimension) {
         var startOfColumn = $('#'+boxId);
-        if (startOfColumn.text() === $('#'+j).text() && !($('#'+j).text()==="box")) {
+        if (startOfColumn.text() === $('#'+j).text() && !($('#'+j).text()==="String.fromCharCode(160)")) {
           winningColumnCounter +=1;
         }
       }
@@ -100,7 +94,7 @@ function checkWinner() {
     if (boxId === 0) {
       var winningFirstDiagnolCounter = 0;
       for (var k=boxId; k<dimension*dimension; k+=(dimension+1)) {
-        if ($('#0').text() === $('#'+k).text() && !($('#'+k).text()==="box")) {
+        if ($('#0').text() === $('#'+k).text() && !($('#'+k).text()==="String.fromCharCode(160)")) {
           winningFirstDiagnolCounter +=1;
         }
       }
@@ -112,7 +106,7 @@ function checkWinner() {
     if (boxId === dimension-1) {
       var winningSecondDiagnolCounter = 0;
       for (var k=boxId; k<dimension*dimension; k+=(dimension-1)) {
-        if ($('#'+(dimension-1)).text() === $('#'+k).text() && !($('#'+k).text()==="box")) {
+        if ($('#'+(dimension-1)).text() === $('#'+k).text() && !($('#'+k).text()==="String.fromCharCode(160)")) {
           winningSecondDiagnolCounter +=1;
         }
       }
@@ -124,9 +118,14 @@ function checkWinner() {
 }
 
 function victory(thePlayer) {
-  console.log("victory for " + thePlayer);
+  var winner = thePlayer;
   //modal message
-
+  if (winner === "X") {
+    console.log("victory for " + thePlayer);
+    $("#myModal").toggle();
+  } else if (winner === "O") {
+    console.log("victory for " + thePlayer);
+  }
 }
 
 
@@ -135,12 +134,12 @@ function victory(thePlayer) {
 
 
 
+//https://thebovinecomedy.files.wordpress.com/2009/07/wargames.jpg
+//make a carousel?
 
 
 
 
-
-
-
+})//end $(document).ready(function(){})
 
 
