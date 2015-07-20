@@ -1,4 +1,6 @@
-
+#scoreBoard{
+  text-align: center;
+}
 
 .box{
   width: 200px;

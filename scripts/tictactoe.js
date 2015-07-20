@@ -9,6 +9,7 @@ var player2;
 var gameOver = false;
 var xScore = 0;
 var oScore = 0;
+var totalTies = 0;
 $('#submit').click(function(e) {
   e.preventDefault();
   player1 = $('#player1-name').val();
@@ -23,7 +24,6 @@ function makeBoard(size){
   var y;
   var x;
   var board = $("<div class='board'></div>");
-  //$('container').append("<div id='scoreBoard'></div>")
   for (y=0; y<size; y++){
     for (x=0; x<size; x++){
       var cell = $('<div>&nbsp</div>');//that's a non-breaking space
@@ -33,6 +33,13 @@ function makeBoard(size){
     }
   }
   $('.container').append(board);
+  $('.board').before("<div id='scoreBoard'></div>")
+  $('#xScore').remove();
+  $('#oScore').remove();
+  $('#ties').remove();
+  $('#scoreBoard').append("<p id='xScore'>"+player1+"'s score: "+xScore+"</p>");
+  $('#scoreBoard').append("<p id='oScore'>"+player2+"'s score: "+oScore+"</p>");
+  $('#scoreBoard').append("<p id='ties'>Total ties: "+totalTies+"</p>");
   $('.container').css('width', 230*size + 'px');//works only up to size 24
   clicking();
 };
@@ -134,7 +141,8 @@ function victory(winningLetter, player1, player2) {
     //$('#myModal').modal();
     gameOver = true;
     xScore += 1;
-    //$('#scoreBoard').append("<p id='xScore'>"+player1+" score: "+xScore+"</p>");
+    $('#xScore').html(player1+"'s score: "+xScore);
+    $('#xScore').css('color','red');
     //$('#0').before("<button id='newGame'>New Game</button><br>");
     $('#modal').toggle();
     $('.modal-header').append("<h5 id='modalHeaderTitle'>Congratulations!</h5>");
@@ -152,7 +160,8 @@ function victory(winningLetter, player1, player2) {
   } else if (winningLetter === "O") {
     gameOver = true;
     oScore += 1;
-    //$('#scoreBoard').append("<p id='xScore'>"+player2+" score: "+oScore+"</p>");
+    $('#oScore').html(player2+"'s score: "+oScore);
+    $('#oScore').css('color','red');
     $('#modal').toggle();
     $('.modal-header').append("<h5 id='modalHeaderTitle'>Congratulations!</h5>");
     $('.modal-body').append("<p id='winningMessage'>"+player2+" is the winner!</p>");
@@ -168,6 +177,11 @@ function victory(winningLetter, player1, player2) {
     });
   } else if (winningLetter === "tie") {
     gameOver = true;
+    totalTies += 1;
+    $('#ties').html("Total ties: "+totalTies);
+    $('#ties').css('color','red');
+    
+    
     $('#modal').toggle();
     $('.modal-header').append("<h5 id='modalHeaderTitle'>To be continued...</h5>");
     $('.modal-body').append("<p id='winningMessage'>It's a tie!</p>");
@@ -184,11 +198,6 @@ function victory(winningLetter, player1, player2) {
   }
 }
 
-
-//don't need it anymore
-// $('#close').on('click', function(){
-//     $('#modal').toggle();
-// }) 
 
 
 //https://thebovinecomedy.files.wordpress.com/2009/07/wargames.jpg
