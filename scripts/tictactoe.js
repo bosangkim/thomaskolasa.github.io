@@ -7,6 +7,8 @@ var size;
 var player1;
 var player2;
 var gameOver = false;
+var xScore = 0;
+var oScore = 0;
 $('#submit').click(function(e) {
   e.preventDefault();
   player1 = $('#player1-name').val();
@@ -18,11 +20,10 @@ $('#submit').click(function(e) {
 });
 
 function makeBoard(size){
-  //$('#newGame').hide('slow');
-  $('#newGame').remove();
   var y;
   var x;
   var board = $("<div class='board'></div>");
+  //$('container').append("<div id='scoreBoard'></div>")
   for (y=0; y<size; y++){
     for (x=0; x<size; x++){
       var cell = $('<div>&nbsp</div>');//that's a non-breaking space
@@ -38,7 +39,6 @@ function makeBoard(size){
 //makeBoard(size);
 
 function clicking(){
-  console.log(gameOver);
   var playerX = true;
   var playerO = false;
   $('.box').click(function() {
@@ -63,6 +63,7 @@ function clicking(){
 
 function checkWinner() {
   var boxId;
+  var filledCells = 0;
   for (boxId=0; boxId<size*size; boxId++) {
     //if row wins
     if (boxId % size === 0) {
@@ -107,7 +108,8 @@ function checkWinner() {
     //if second diagnol wins
     if (boxId === size-1) {
       var winningSecondDiagnolCounter = 0;
-      for (var k=boxId; k<size*size; k+=(size-1)) {
+      //careful to limit that final box doesn't count in second diagnol
+      for (var k=boxId; k<=(size*size-size); k+=(size-1)) {
         if ($('#'+(size-1)).text() === $('#'+k).text() && !($('#'+k).text()==="String.fromCharCode(160)")) {
           winningSecondDiagnolCounter +=1;
         }
@@ -115,36 +117,83 @@ function checkWinner() {
       if (winningSecondDiagnolCounter === size) {
         victory($('#'+(size-1)).text(), player1, player2);
       }
-    }    
+    }
+    //check if tie
+    if ($('#'+boxId).text()==="X" || $('#'+boxId).text()==="O") {
+      filledCells+=1;
+      if (filledCells === size*size) {
+        victory("tie", player1, player2);
+      }
+    }
   }
 }
 
 function victory(winningLetter, player1, player2) {
-  //make modal message?
+  //make modal message
   if (winningLetter === "X") {
     //$('#myModal').modal();
     gameOver = true;
-    $('#0').before("<button id='newGame'>New Game</button><br>");
+    xScore += 1;
+    //$('#scoreBoard').append("<p id='xScore'>"+player1+" score: "+xScore+"</p>");
+    //$('#0').before("<button id='newGame'>New Game</button><br>");
+    $('#modal').toggle();
+    $('.modal-header').append("<h5 id='modalHeaderTitle'>Congratulations!</h5>");
+    $('.modal-body').append("<p id='winningMessage'>"+player1+" is the winner!</p>");
+    $('.modal-body').append("<button id='newGame'>Play Again?</button>");
     $('#newGame').click(function(){
+      $('#modalHeaderTitle').remove();
+      $('#winningMessage').remove();
+      $('#newGame').remove();
+      $('#modal').toggle();
       $('.box').remove();
       gameOver = false;
       makeBoard(size);
     })
   } else if (winningLetter === "O") {
     gameOver = true;
-    $('#0').before("<button id='newGame'>New Game</button><br>");
+    oScore += 1;
+    //$('#scoreBoard').append("<p id='xScore'>"+player2+" score: "+oScore+"</p>");
+    $('#modal').toggle();
+    $('.modal-header').append("<h5 id='modalHeaderTitle'>Congratulations!</h5>");
+    $('.modal-body').append("<p id='winningMessage'>"+player2+" is the winner!</p>");
+    $('.modal-body').append("<button id='newGame'>Play Again?</button>");
     $('#newGame').click(function(){
+      $('#modalHeaderTitle').remove();
+      $('#winningMessage').remove();
+      $('#newGame').remove();
+      $('#modal').toggle();
+      $('.box').remove();
+      gameOver = false;
+      makeBoard(size);
+    });
+  } else if (winningLetter === "tie") {
+    gameOver = true;
+    $('#modal').toggle();
+    $('.modal-header').append("<h5 id='modalHeaderTitle'>To be continued...</h5>");
+    $('.modal-body').append("<p id='winningMessage'>It's a tie!</p>");
+    $('.modal-body').append("<button id='newGame'>Play Again?</button>");
+    $('#newGame').click(function(){
+      $('#modalHeaderTitle').remove();
+      $('#winningMessage').remove();
+      $('#newGame').remove();
+      $('#modal').toggle();
       $('.box').remove();
       gameOver = false;
       makeBoard(size);
     });
   }
 }
-$("#myBtn").click(function(){
-      $("#myModal").modal();
-  });
+
+
+//don't need it anymore
+// $('#close').on('click', function(){
+//     $('#modal').toggle();
+// }) 
+
 
 //https://thebovinecomedy.files.wordpress.com/2009/07/wargames.jpg
 
 })//end $(document).ready(function(){})
-
+// XXO
+// OOX
+// X_O
