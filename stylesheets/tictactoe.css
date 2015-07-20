@@ -11,6 +11,8 @@
   font-size: 135px;
 }
 
-form{
-  
+#newGame{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

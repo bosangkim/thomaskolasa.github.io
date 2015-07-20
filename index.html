@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <!-- this used to be at the end-->
-  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- this used to be at the end (bootstrap)-->
+  
   <link rel="stylesheet" type="text/css" href="stylesheets/tictactoe.css">
   <title>Tic-Tac-Toe</title>
 </head>
@@ -15,7 +15,7 @@
     <div class="jumbotron">
       <h1>Tic-Tac-Toe</h1>
       <div class="directions">
-        <p>Set both your names. Play Tic-Tac-Toe. Contemplate existence.</p>
+        <p>Set both your names. Choose a board size. Play Tic-Tac-Toe. Contemplate existence.</p>
       </div>
     </div>
     <form role="form" class="form-horizontal">
@@ -34,17 +34,40 @@
       <div class="form-group form-group-sm">
         <div class="col-xs-2">
           <label for="numberOfRows">Size:</label>
-          <input type="text" class="form-control" id="numberOfRows" placeholder="3">
+          <input type="text" class="form-control" id="size" placeholder="3 to 24">
         </div>
       </div>
       <button id="submit" class="btn btn-default">Begin!</button>
     </form>
 
 
+<!--     <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+    
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <p>Some text in the modal.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
 
-  <div id="myModal" class="modal fade" role="dialog">
+      </div>
+    </div> -->
+
+    <h2>Activate Modal with JavaScript</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" id="myBtn">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-
+    
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -58,7 +81,7 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-
+      
     </div>
   </div>
 
