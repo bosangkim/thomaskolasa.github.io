@@ -1,3 +1,22 @@
+.form-horizontal{
+  /*text-align: center;*/
+}
+
+#size{ 
+  position: relative;
+}
+
+#bottomRowOfForm{
+  position: relative;
+  height: 55px;
+}
+
+#submit{
+  position: absolute;
+  top: 41%;
+
+}
+
 #scoreBoard{
   text-align: center;
 }

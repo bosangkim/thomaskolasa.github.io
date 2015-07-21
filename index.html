@@ -12,34 +12,37 @@
 </head>
 <body>
   <div class="container"> <!--Or maybe fluid?-->
+
     <div class="jumbotron">
       <h1>Tic-Tac-Toe</h1>
       <div class="directions">
-        <p>Set both your names. Choose a board size. Play Tic-Tac-Toe. Contemplate existence.</p>
+        <p>Set both your names. Choose a board size. <br>Play Tic-Tac-Toe. Contemplate existence.</p>
       </div>
     </div>
+
     <form role="form" class="form-horizontal">
       <div class="form-group form-group-sm">
-        <div class="col-xs-3">
+        <div class="col-xs-6">
           <label for="player1-name">X's:</label>
           <input type="text" class="form-control" id="player1-name" placeholder="Player 1">
         </div>
       </div>
       <div class="form-group form-group-sm">
-        <div class="col-xs-3">
+        <div class="col-xs-6">
           <label for="player2-name">O's:</label>
           <input type="text" class="form-control" id="player2-name" placeholder="Player 2">
         </div>
       </div>
       <div class="form-group form-group-sm">
-        <div class="col-xs-2">
-          <label for="numberOfRows">Size:</label>
-          <input type="text" class="form-control" id="size" placeholder="3 to 24">
+        <div id="bottomRowOfForm">
+          <div class="col-xs-2">
+            <label for="numberOfRows">Size:</label>
+            <input type="text" class="form-control" id="size" placeholder="3 to 24">
+          </div>
+          <button id="submit" class="btn btn-default">Begin!</button>
         </div>
       </div>
-      <button id="submit" class="btn btn-default">Begin!</button>
     </form>
-
 
 <!--     <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">

@@ -1,9 +1,11 @@
 console.log("Linked!");
-//get names
+
 $(document).ready(function(){
 
 //var size = 3;
-var size;
+var size=3;
+makeBoard(size);
+$('#scoreBoard').hide();
 var player1;
 var player2;
 var gameOver = false;
@@ -17,13 +19,18 @@ $('#submit').click(function(e) {
   size = parseInt($('#size').val());
   makeBoard(size);
   $('.form-horizontal').hide("slow");
+  $('#scoreBoard').show(); 
   clicking();
 });
 
-function makeBoard(size){
+function makeBoard(){
+  $('.box').remove();
   var y;
   var x;
   var board = $("<div class='board'></div>");
+  if (!size) {
+    size = 3;
+  }
   for (y=0; y<size; y++){
     for (x=0; x<size; x++){
       var cell = $('<div>&nbsp</div>');//that's a non-breaking space
@@ -37,13 +44,19 @@ function makeBoard(size){
   $('#xScore').remove();
   $('#oScore').remove();
   $('#ties').remove();
+  
+  if (!player1) {
+    player1 = "X";
+  }
+  if (!player2) {
+    player2 = "O";
+  }
   $('#scoreBoard').append("<p id='xScore'>"+player1+"'s score: "+xScore+"</p>");
   $('#scoreBoard').append("<p id='oScore'>"+player2+"'s score: "+oScore+"</p>");
   $('#scoreBoard').append("<p id='ties'>Total ties: "+totalTies+"</p>");
   $('.container').css('width', 230*size + 'px');//works only up to size 24
   clicking();
 };
-//makeBoard(size);
 
 function clicking(){
   var playerX = true;
@@ -69,6 +82,7 @@ function clicking(){
 }
 
 function checkWinner() {
+  console.log(player1);
   var boxId;
   var filledCells = 0;
   for (boxId=0; boxId<size*size; boxId++) {
@@ -142,7 +156,7 @@ function victory(winningLetter, player1, player2) {
     gameOver = true;
     xScore += 1;
     $('#xScore').html(player1+"'s score: "+xScore);
-    $('#xScore').css('color','red');
+    $('#xScore').css('color','green');
     //$('#0').before("<button id='newGame'>New Game</button><br>");
     $('#modal').toggle();
     $('.modal-header').append("<h5 id='modalHeaderTitle'>Congratulations!</h5>");
@@ -153,7 +167,6 @@ function victory(winningLetter, player1, player2) {
       $('#winningMessage').remove();
       $('#newGame').remove();
       $('#modal').toggle();
-      $('.box').remove();
       gameOver = false;
       makeBoard(size);
     })
@@ -161,7 +174,7 @@ function victory(winningLetter, player1, player2) {
     gameOver = true;
     oScore += 1;
     $('#oScore').html(player2+"'s score: "+oScore);
-    $('#oScore').css('color','red');
+    $('#oScore').css('color','green');
     $('#modal').toggle();
     $('.modal-header').append("<h5 id='modalHeaderTitle'>Congratulations!</h5>");
     $('.modal-body').append("<p id='winningMessage'>"+player2+" is the winner!</p>");
@@ -171,7 +184,6 @@ function victory(winningLetter, player1, player2) {
       $('#winningMessage').remove();
       $('#newGame').remove();
       $('#modal').toggle();
-      $('.box').remove();
       gameOver = false;
       makeBoard(size);
     });
@@ -179,7 +191,7 @@ function victory(winningLetter, player1, player2) {
     gameOver = true;
     totalTies += 1;
     $('#ties').html("Total ties: "+totalTies);
-    $('#ties').css('color','red');
+    $('#ties').css('color','orange');
     
     
     $('#modal').toggle();
@@ -191,7 +203,6 @@ function victory(winningLetter, player1, player2) {
       $('#winningMessage').remove();
       $('#newGame').remove();
       $('#modal').toggle();
-      $('.box').remove();
       gameOver = false;
       makeBoard(size);
     });
