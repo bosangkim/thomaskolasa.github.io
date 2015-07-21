@@ -42,11 +42,11 @@ function makeBoard(){
     }
   }
   $('.container').append(board);
+  $('#scoreBoard').remove();
   $('.board').before("<div id='scoreBoard'></div>")
   $('#xScore').remove();
   $('#oScore').remove();
   $('#ties').remove();
-  $('#scoreBoard').remove();
   if (!player1) {
     player1 = "X";
   }
@@ -56,6 +56,7 @@ function makeBoard(){
   $('#scoreBoard').append("<p id='xScore'>"+player1+"'s score: "+xScore+"</p>");
   $('#scoreBoard').append("<p id='oScore'>"+player2+"'s score: "+oScore+"</p>");
   $('#scoreBoard').append("<p id='ties'>Total ties: "+totalTies+"</p>");
+  $('#scoreBoard').show();
   $('.container').css('width', 230*size + 'px');//works only up to size 24
   clicking();
 };
@@ -173,6 +174,8 @@ function victory(winningLetter, player1, player2) {
       $('#newGame').remove();
       $('#modal').toggle();
       gameOver = false;
+      $('#scoreBoard').remove();
+      $('#board').remove();
       makeBoard(size);
     })
   } else if (winningLetter === "O") {
@@ -190,6 +193,8 @@ function victory(winningLetter, player1, player2) {
       $('#newGame').remove();
       $('#modal').toggle();
       gameOver = false;
+      $('#scoreBoard').remove();
+      $('#board').remove();
       makeBoard(size);
     });
   } else if (winningLetter === "tie") {
@@ -209,6 +214,8 @@ function victory(winningLetter, player1, player2) {
       $('#newGame').remove();
       $('#modal').toggle();
       gameOver = false;
+      $('#scoreBoard').remove();
+      $('#board').remove();
       makeBoard(size);
     });
   }
