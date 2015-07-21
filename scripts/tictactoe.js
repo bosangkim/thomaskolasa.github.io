@@ -1,7 +1,9 @@
 console.log("Linked!");
 
 $(document).ready(function(){
-
+// OOX
+// XXO
+// XOX
 //var size = 3;
 var size=3;
 makeBoard(size);
@@ -44,7 +46,7 @@ function makeBoard(){
   $('#xScore').remove();
   $('#oScore').remove();
   $('#ties').remove();
-  
+  $('#scoreBoard').remove();
   if (!player1) {
     player1 = "X";
   }
@@ -82,7 +84,6 @@ function clicking(){
 }
 
 function checkWinner() {
-  console.log(player1);
   var boxId;
   var filledCells = 0;
   for (boxId=0; boxId<size*size; boxId++) {
@@ -98,6 +99,7 @@ function checkWinner() {
       }
       if (winningRowCounter === size) {
         victory(startOfRow.text(), player1, player2);
+        return;
       }
     }
     //if column wins
@@ -111,6 +113,7 @@ function checkWinner() {
       }
       if (winningColumnCounter === size) {
         victory(startOfColumn.text(), player1, player2);
+        return;
       }
       //console.log(winningColumnCounter);
     }
@@ -124,6 +127,7 @@ function checkWinner() {
       }
       if (winningFirstDiagnolCounter === size) {
         victory($('#0').text(), player1, player2);
+        return;
       }
     }
     //if second diagnol wins
@@ -137,6 +141,7 @@ function checkWinner() {
       }
       if (winningSecondDiagnolCounter === size) {
         victory($('#'+(size-1)).text(), player1, player2);
+        return;
       }
     }
     //check if tie
