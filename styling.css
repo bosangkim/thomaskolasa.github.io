@@ -1,0 +1,112 @@
+body{
+  margin: 0px;
+  padding: 0px;
+}
+
+#first-frame{
+  min-width: 100%;
+}
+
+.image1{
+  position: absolute;
+  min-width: 100%;
+  background: url("images/Dryburgh_Abbey.jpg") no-repeat center center ;
+  -webkit-background-size: cover;
+  background-size: cover;
+  z-index: -1;
+  opacity: .2;
+}
+
+h1, h2{
+  text-align: center;
+}
+
+#main-nav{
+  text-align: center;
+}
+
+#main-nav li{
+  display: inline-block;
+  margin: 0px 5px;
+  padding: 0px 25px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  color: black;
+  font-size: 24px;
+}
+
+#main-nav li:hover{
+  color: black;
+  background-color: #C0C0C0 ;
+}
+
+#about{
+  margin-left: 30%;
+  margin-right: 30%;
+  padding: 10px;
+  font-size: 14pt;
+}
+
+#second-frame{
+  background-color: #000033 ;
+  color: white;
+}
+#courses{
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+#description{
+  text-indent: 50px;
+}
+
+#third-frame{
+  text-align: center;
+}
+
+.image3{
+  position: absolute;
+  min-width: 100%;
+  background: url("images/da-vinci.jpg") no-repeat center center ;
+  -webkit-background-size: cover;
+  background-size: cover;
+  z-index: -1;
+  opacity: .2;
+}
+
+
+#fourth-frame{
+  text-align: center;
+}
+
+#fourth-background{
+  position: absolute;
+  min-width: 100%;
+  background: url("images/OrteliusWorldMapedited.png") no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  z-index: -2;
+  opacity: .2;
+}
+
+#linkedin-text{
+  text-decoration: none;
+  color: #4875B4;
+}
+
+#linkedin-icon{
+  border-radius: 5px;
+}
+
+#linkedin-icon:hover{
+  opacity: .8;
+}
+
+#footer{
+  margin: 0;
+  text-align: center;
+  min-width: 100%;
+  padding: 20px 0px;
+  background-color: #E0E0E0;
+}
